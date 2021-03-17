@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Pocket Shuffle
-// @namespace    https://ykgoon.com/
-// @version      0.1.2
+// @namespace    https://github.com/ykgoon/pocket-shuffle/blob/master/index.js
+// @version      0.2.0
 // @description  Randomized article order
 // @author       Y.K. Goon
 // @match        https://getpocket.com/my-list*
@@ -54,5 +54,15 @@
                 list.appendChild(list.children[Math.random() * i | 0]);
             }
         }
+
+        // Always redirect to unread articles
+        let currentURL = window.location.href;
+        let tag = currentURL.match(/tags/);
+        const unread = currentURL.match(/unread/);
+        if(tag.length > 0 && unread === null){
+            currentURL += '/unread';
+            document.location.href = currentURL ;
+        }
     }
+
 })();
